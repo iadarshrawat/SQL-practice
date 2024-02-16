@@ -1,6 +1,9 @@
 import { getClient } from "./utils";
 
 async function createTable() {
+
+    const client = await getClient();
+
     const createUserTableQuery = `
         CREATE TABLE users (
             id SERIAL PRIMARY KEY,
@@ -8,8 +11,6 @@ async function createTable() {
             password VARCHAR(255) NOT NULL
         );
     `;
-
-    const client = await getClient();
 
     await client.query(createUserTableQuery);
 
@@ -23,12 +24,9 @@ async function createTable() {
         );
     `;
 
-
     await client.query(createTodosQuery);
 
     console.log("Table created successfully!");
 }
-
-
 
 createTable();
